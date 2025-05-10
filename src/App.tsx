@@ -1,12 +1,16 @@
-import ButtonBox from './components/ButtonBox/ButtonBox'
-import MusicPlayer from './components/MusicPlayer'
+import { Box } from '@mui/material'
+import SideBar from './pages/SideBar'
+import PresetPlayer from './pages/PresetPlayer'
+import PresetProvider from './providers/PresetProvider'
 
 function App() {
   return (
-    <div className='flex flex-col items-center h-screen gap-4'>
-      <MusicPlayer />
-      <ButtonBox />
-    </div>
+    <PresetProvider>
+      <Box sx={{ display: 'flex' }}>
+        <SideBar />
+        <PresetPlayer />
+      </Box>
+    </PresetProvider>
   )
 }
 

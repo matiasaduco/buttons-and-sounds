@@ -9,3 +9,19 @@ export type ImgFile = {
   size: string
   preview: string
 }
+
+export type Sound = {
+  id: number
+  name: string
+  urls?: string[]
+  files?: File[]
+  preview?: string
+  category: string
+}
+
+export type Preset = {
+  id: number
+  name: string
+  music?: string
+  sounds?: Sound[]
+}
