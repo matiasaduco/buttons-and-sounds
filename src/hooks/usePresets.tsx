@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const usePresets = () => {
   const [presets, setPresets] = useState<Preset[]>([])
 
-  const handleDeletePreset = (id: number) => {
+  const handleDeletePreset = (id?: number) => {
     setPresets((prev) => prev.filter((preset) => preset.id !== id))
   }
 
@@ -41,15 +41,6 @@ const usePresets = () => {
           },
         ],
       },
-      { id: 2, name: 'Preset 2' },
-      { id: 3, name: 'Preset 3' },
-      { id: 4, name: 'Preset 4' },
-      { id: 5, name: 'Preset 5' },
-      { id: 6, name: 'Preset 6' },
-      { id: 7, name: 'Preset 7' },
-      { id: 8, name: 'Preset 8' },
-      { id: 9, name: 'Preset 9' },
-      { id: 10, name: 'Preset 10' },
     ])
   }, [])
 

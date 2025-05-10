@@ -1,7 +1,8 @@
-import usePresetContext from '@/hooks/usePresetContext'
+import usePresetContext from '@/contexts/hooks/usePresetContext'
+import useSoundDialogContext from '@/contexts/hooks/useSoundDialogContext'
 import usePresets from '@/hooks/usePresets'
 import useSounds from '@/hooks/useSounds'
-import { Delete, Edit, PlayArrow } from '@mui/icons-material'
+import { Delete, Edit } from '@mui/icons-material'
 import {
   ButtonGroup,
   Divider,
@@ -18,7 +19,8 @@ import {
 const SideBar = () => {
   const { presets, handleDeletePreset } = usePresets()
   const { setSelectedPreset } = usePresetContext()
-  const { sounds } = useSounds()
+  const { sounds, handleDeleteSound } = useSounds()
+  const { openDialog } = useSoundDialogContext()
 
   return (
     <Drawer
@@ -40,12 +42,6 @@ const SideBar = () => {
       </Toolbar>
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => setSelectedPreset(null)}>
-            <ListItemText primary='Default' />
-          </ListItemButton>
-        </ListItem>
-
         {presets?.map((preset) => (
           <ListItem key={preset.id} disablePadding>
             <ListItemButton onClick={() => setSelectedPreset(preset)}>
@@ -62,6 +58,11 @@ const SideBar = () => {
             </ButtonGroup>
           </ListItem>
         ))}
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => setSelectedPreset(null)}>
+            <ListItemText primary='New Preset' />
+          </ListItemButton>
+        </ListItem>
       </List>
 
       <Divider />
@@ -74,24 +75,27 @@ const SideBar = () => {
       <List>
         {sounds?.map((sound) => (
           <ListItem key={sound.id} disablePadding>
-            <ListItemButton onClick={() => setSelectedPreset(sound)}>
+            <ListItemButton>
               <ListItemText primary={sound.name} secondary={sound.category} />
             </ListItemButton>
 
             <ButtonGroup disableElevation aria-label='Basic button group'>
-              <IconButton>
-                <PlayArrow />
-              </IconButton>
-              <IconButton>
+              <IconButton onClick={() => openDialog(sound)}>
                 <Edit />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={() => handleDeleteSound(sound.id)}>
                 <Delete />
               </IconButton>
             </ButtonGroup>
           </ListItem>
         ))}
       </List>
+
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => setSelectedPreset(null)}>
+          <ListItemText primary='New Sound' />
+        </ListItemButton>
+      </ListItem>
     </Drawer>
   )
 }

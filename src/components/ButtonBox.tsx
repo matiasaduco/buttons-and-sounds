@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import AddButtonModal from './AddSoundModal'
 import {
   Button,
   Card,
@@ -15,15 +14,11 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import { Sound } from '@/types/types'
 import add_sound_icon from '@public/add-sound.svg'
 import { Delete, Edit, Shuffle } from '@mui/icons-material'
+import useSoundDialogContext from '@/contexts/hooks/useSoundDialogContext'
 
 const ButtonBox = ({ sounds }: { sounds: Sound[] | undefined }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const { openDialog } = useSoundDialogContext()
   const [selectedSound, setSelectedSound] = useState<File | string>()
-
-  const handleEdit = (id: number) => {
-    console.log('Edit button clicked', id)
-    setIsOpen(true)
-  }
 
   const handleDelete = (id: number) => {
     console.log('Delete button clicked', id)
@@ -81,7 +76,7 @@ const ButtonBox = ({ sounds }: { sounds: Sound[] | undefined }) => {
             <CardMedia component='img' sx={{ width: 151 }} image={sound.preview} alt={sound.name} />
 
             <div className='absolute top-0 right-0'>
-              <IconButton onClick={() => handleEdit(sound.id)}>
+              <IconButton onClick={() => openDialog(sound)}>
                 <Edit />
               </IconButton>
               <IconButton onClick={() => handleDelete(sound.id)}>
@@ -92,13 +87,11 @@ const ButtonBox = ({ sounds }: { sounds: Sound[] | undefined }) => {
         ))}
 
         <Card sx={{ height: 154 }}>
-          <Button onClick={() => setIsOpen(true)}>
+          <Button onClick={() => openDialog()}>
             <img src={add_sound_icon} />
           </Button>
         </Card>
       </div>
-
-      {isOpen && <AddButtonModal isOpen={isOpen} handleClose={() => setIsOpen(false)} />}
     </div>
   )
 }

@@ -11,17 +11,17 @@ export type ImgFile = {
 }
 
 export type Sound = {
-  id: number
-  name: string
+  id?: number
+  name?: string
   urls?: string[]
   files?: File[]
   preview?: string
-  category: string
+  category?: string
 }
 
 export type Preset = {
-  id: number
-  name: string
+  id?: number
+  name?: string
   music?: string
   sounds?: Sound[]
 }
