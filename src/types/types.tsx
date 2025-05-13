@@ -1,3 +1,5 @@
+import { UUID } from 'crypto'
+
 export type AddSoundModalProps = {
   isOpen: boolean
   handleClose: () => void
@@ -11,8 +13,8 @@ export type ImgFile = {
 }
 
 export type Sound = {
-  id?: number
-  name?: string
+  id: UUID
+  name: string
   urls?: string[]
   files?: File[]
   preview?: string
@@ -20,8 +22,15 @@ export type Sound = {
 }
 
 export type Preset = {
-  id?: number
-  name?: string
+  id: UUID
+  name: string
   music?: string
   sounds?: Sound[]
 }
+
+export type DBData = {
+  presets: Preset[]
+  sounds: Sound[]
+}
+
+export type DBTypes = Preset | Sound
