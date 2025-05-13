@@ -9,8 +9,11 @@
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@service/*": ["src/service/*"]
     },
+    "allowJs": true, 
+    "checkJs": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

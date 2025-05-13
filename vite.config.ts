@@ -34,6 +34,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
       '@public': path.resolve(__dirname, './public'),
+      '@service': path.resolve(__dirname, './src/service'),
     },
   },
 })
